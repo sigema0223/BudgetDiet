@@ -1,0 +1,2 @@
+// Analysis result domain interfaces
+
