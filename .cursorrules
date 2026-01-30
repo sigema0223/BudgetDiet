@@ -1,38 +1,38 @@
-# Cursor AI 행동 지침
+# Cursor AI Behavior Guidelines
 
-## 프로젝트 컨텍스트
-이 프로젝트는 Clean Architecture 원칙을 따르는 문서 분석 및 예산 관리 애플리케이션입니다.
+## Project Context
+This project is a document analysis and budget management application following Clean Architecture principles.
 
-## 코딩 규칙
+## Coding Rules
 
 ### TypeScript
-- `strict: true` 모드 필수
-- 타입 안정성 우선
-- 명시적 타입 선언 권장
+- `strict: true` mode required
+- Type safety first
+- Explicit type declarations recommended
 
-### 아키텍처 원칙
-- **Domain Layer**: 순수 비즈니스 로직만 포함, 외부 의존성 금지
-- **Infrastructure Layer**: 외부 라이브러리 및 API 구현
-- **Application Layer**: 유스케이스 오케스트레이션
-- 의존성 방향: Infrastructure → Application → Domain
+### Architecture Principles
+- **Domain Layer**: Contains only pure business logic, no external dependencies allowed
+- **Infrastructure Layer**: External library and API implementations
+- **Application Layer**: Use case orchestration
+- Dependency direction: Infrastructure → Application → Domain
 
-### 코드 스타일
-- 인터페이스를 통한 의존성 역전
-- Result<T, E> 패턴을 통한 에러 처리
-- 명확한 함수 및 변수 네이밍
-- 주석은 "왜"를 설명, 코드는 "무엇"을 설명
+### Code Style
+- Dependency inversion through interfaces
+- Error handling through Result<T, E> pattern
+- Clear function and variable naming
+- Comments explain "why", code explains "what"
 
-### 파일 구조
-- 각 레이어는 명확히 분리
-- 관련 파일은 같은 디렉토리에 그룹화
-- 파일명은 kebab-case 사용
+### File Structure
+- Each layer is clearly separated
+- Related files are grouped in the same directory
+- Use kebab-case for file names
 
-### 테스트
-- Mock 클라이언트를 통한 테스트 가능한 구조
-- 도메인 로직은 순수 함수로 작성하여 테스트 용이
+### Testing
+- Testable structure through Mock clients
+- Domain logic written as pure functions for easy testing
 
-## 주의사항
-- Domain Layer에 외부 라이브러리 import 금지
-- 비즈니스 로직은 Domain Layer에만 위치
-- Infrastructure는 Domain의 인터페이스를 구현
+## Important Notes
+- No external library imports in Domain Layer
+- Business logic only resides in Domain Layer
+- Infrastructure implements Domain interfaces
 

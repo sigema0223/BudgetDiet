@@ -1,5 +1,96 @@
 # BudgetDiet
 
+Document analysis and budget management application
+
+## Project Structure
+
+```
+root/
+├── .cursorrules                # Cursor AI behavior guidelines
+├── README.md                   # Project documentation
+├── tsconfig.json               # TypeScript configuration (strict: true)
+├── package.json                # Project dependency management
+│
+├── convex/                     # 🚀 Backend Core (Convex)
+│   ├── schema.ts               # [Data] Database tables and type definitions (Zod-like)
+│   │
+│   ├── domain/                 # [Pure] Pure business logic (no dependencies)
+│   │   ├── types/
+│   │   │   ├── result.ts       # Result<T, E> union type
+│   │   │   └── analysis.ts     # Analysis result domain interfaces
+│   │   ├── entities/
+│   │   │   └── document.ts     # Document domain model class/type
+│   │   └── services/
+│   │       ├── llm.interface.ts # ILLMClient interface
+│   │       └── repo.interface.ts# IRepository interface
+│   │
+│   ├── infrastructure/         # [Detail] External tool implementations
+│   │   ├── llm/
+│   │   │   ├── openai.client.ts # OpenAI API integration implementation
+│   │   │   └── mock.client.ts   # Mock client for testing
+│   │   └── utils/
+│   │       ├── pdf.parser.ts    # PDF text extraction logic
+│   │       └── logger.ts         # System logging utility
+│   │
+│   ├── application/            # [Flow] Use case orchestration
+│   │   └── use-cases/
+│   │       └── analyze_doc.ts   # "Extract -> Analyze -> Save" flow orchestration
+│   │
+│   ├── documents.ts            # [Entry: DB] Queries & Mutations (Data Access)
+│   └── actions.ts              # [Entry: API] Actions (External API & Async)
+│
+└── src/                        # 🎨 Frontend (Next.js/React)
+    ├── api/                    # Convex client configuration
+    ├── components/             # UI components (Upload, ResultView, etc.)
+    ├── hooks/                 # Custom hooks using useQuery, useAction
+    └── App.tsx                 # Main screen
+```
+
+## Architecture Overview
+
+### Backend (Convex)
+
+- **Domain Layer**: Pure business logic, no external dependencies
+- **Infrastructure Layer**: External API and utility implementations
+- **Application Layer**: Use case orchestration
+- **Entry Points**: 
+  - `documents.ts`: Database queries and mutations
+  - `actions.ts`: External API calls and async operations
+
+### Frontend (Next.js/React)
+
+- **Components**: Reusable UI components
+- **Hooks**: Custom hooks for interacting with Convex
+- **API**: Convex client configuration
+
+## Tech Stack
+
+- **Backend**: Convex
+- **Frontend**: Next.js, React, TypeScript
+- **AI**: OpenAI API
+- **Language**: TypeScript (strict mode)
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+## Development Guide
+
+- Use TypeScript strict mode
+- Follow Clean Architecture principles
+- Separate domain logic from infrastructure
+- Dependency inversion through interfaces
+
+---
+
+# BudgetDiet (한국어)
+
 문서 분석 및 예산 관리 애플리케이션
 
 ## 프로젝트 구조
