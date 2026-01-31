@@ -8,7 +8,9 @@ Document analysis and budget management application
 root/
 ├── .cursorrules                # Cursor AI behavior guidelines
 ├── README.md                   # Project documentation
-├── tsconfig.json               # TypeScript configuration (strict: true)
+├── index.html                   # HTML entry point
+├── vite.config.ts               # Vite configuration
+├── tsconfig.json                # TypeScript configuration (strict: true)
 ├── package.json                # Project dependency management
 │
 ├── convex/                     # 🚀 Backend Core (Convex)
@@ -20,7 +22,7 @@ root/
 │   │   │   └── analysis.ts     # Analysis result domain interfaces
 │   │   ├── entities/
 │   │   │   └── document.ts     # Document domain model class/type
-│   │   └── services/
+│   │   └── ports/
 │   │       ├── llm.interface.ts # ILLMClient interface
 │   │       └── repo.interface.ts# IRepository interface
 │   │
@@ -39,11 +41,12 @@ root/
 │   ├── documents.ts            # [Entry: DB] Queries & Mutations (Data Access)
 │   └── actions.ts              # [Entry: API] Actions (External API & Async)
 │
-└── src/                        # 🎨 Frontend (Next.js/React)
+└── src/                        # 🎨 Frontend (Vite + React)
     ├── api/                    # Convex client configuration
     ├── components/             # UI components (Upload, ResultView, etc.)
     ├── hooks/                 # Custom hooks using useQuery, useAction
-    └── App.tsx                 # Main screen
+    ├── App.tsx                 # Main application component
+    └── main.tsx                # Application entry point
 ```
 
 ## Architecture Overview
@@ -57,16 +60,17 @@ root/
   - `documents.ts`: Database queries and mutations
   - `actions.ts`: External API calls and async operations
 
-### Frontend (Next.js/React)
+### Frontend (Vite + React)
 
 - **Components**: Reusable UI components
 - **Hooks**: Custom hooks for interacting with Convex
 - **API**: Convex client configuration
+- **Entry Point**: `main.tsx` initializes React app with ConvexProvider
 
 ## Tech Stack
 
 - **Backend**: Convex
-- **Frontend**: Next.js, React, TypeScript
+- **Frontend**: Vite, React, TypeScript
 - **AI**: OpenAI API
 - **Language**: TypeScript (strict mode)
 
@@ -99,6 +103,8 @@ npm run dev
 root/
 ├── .cursorrules                # Cursor AI의 행동 지침
 ├── README.md                   # 프로젝트 문서화
+├── index.html                   # HTML 진입점
+├── vite.config.ts               # Vite 설정
 ├── tsconfig.json               # TypeScript 설정 (strict: true)
 ├── package.json                # 프로젝트 의존성 관리
 │
@@ -111,7 +117,7 @@ root/
 │   │   │   └── analysis.ts     # 분석 결과 도메인 인터페이스
 │   │   ├── entities/
 │   │   │   └── document.ts     # 문서 도메인 모델 클래스/타입
-│   │   └── services/
+│   │   └── ports/
 │   │       ├── llm.interface.ts # ILLMClient 인터페이스
 │   │       └── repo.interface.ts# IRepository 인터페이스
 │   │
@@ -130,11 +136,12 @@ root/
 │   ├── documents.ts            # [Entry: DB] Queries & Mutations (Data Access)
 │   └── actions.ts              # [Entry: API] Actions (External API & Async)
 │
-└── src/                        # 🎨 Frontend (Next.js/React)
+└── src/                        # 🎨 Frontend (Vite + React)
     ├── api/                    # Convex 클라이언트 설정
     ├── components/             # UI (Upload, ResultView 등)
     ├── hooks/                 # useQuery, useAction 활용 커스텀 훅
-    └── App.tsx                 # 메인 화면
+    ├── App.tsx                 # 메인 애플리케이션 컴포넌트
+    └── main.tsx                # 애플리케이션 진입점
 ```
 
 ## 아키텍처 개요
@@ -148,16 +155,17 @@ root/
   - `documents.ts`: 데이터베이스 쿼리 및 뮤테이션
   - `actions.ts`: 외부 API 호출 및 비동기 작업
 
-### Frontend (Next.js/React)
+### Frontend (Vite + React)
 
 - **Components**: 재사용 가능한 UI 컴포넌트
 - **Hooks**: Convex와의 상호작용을 위한 커스텀 훅
 - **API**: Convex 클라이언트 설정
+- **Entry Point**: `main.tsx`에서 ConvexProvider로 React 앱 초기화
 
 ## 기술 스택
 
 - **Backend**: Convex
-- **Frontend**: Next.js, React, TypeScript
+- **Frontend**: Vite, React, TypeScript
 - **AI**: OpenAI API
 - **Language**: TypeScript (strict mode)
 

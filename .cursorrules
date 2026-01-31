@@ -1,4 +1,5 @@
 # Cursor AI Behavior Guidelines
+This project prioritizes long-term maintainability over short-term convenience.
 
 ## Project Context
 This project is a document analysis and budget management application following Clean Architecture principles.
@@ -15,6 +16,16 @@ This project is a document analysis and budget management application following 
 - **Infrastructure Layer**: External library and API implementations
 - **Application Layer**: Use case orchestration
 - Dependency direction: Infrastructure → Application → Domain
+
+### Core Architectural Rules
+
+- The domain layer is the single source of truth for business logic and must remain framework-agnostic.
+
+- All external systems (LLM providers, storage, parsers) must be replaceable without modifying the domain layer.
+
+- Failures are treated as designed states, not unexpected exceptions.  
+  Prefer returning typed Result<T, E> objects instead of throwing errors whenever possible.
+
 
 ### Code Style
 - Dependency inversion through interfaces
