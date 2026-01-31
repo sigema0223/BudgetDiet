@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { ErrorBoundary } from "./ErrorBoundary.tsx";
 import App from "./App.tsx";
+import "./index.css";
 
 // Initialize Convex client
 const convexUrl = (import.meta.env.VITE_CONVEX_URL as string) || "";

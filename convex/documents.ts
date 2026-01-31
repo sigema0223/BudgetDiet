@@ -92,3 +92,23 @@ export const updateStatus = mutation({
     });
   },
 });
+
+// 6. [Update] Save AI Analysis Result
+export const saveAnalysisResult = mutation({
+  args: {
+    documentId: v.id("documents"),
+    analysis: v.object({
+      totalSpent: v.number(),
+      period: v.optional(v.string()),
+      transactions: v.array(v.any()),
+      summary: v.optional(v.string()), // AI's sarcastic or encouraging comment (English)
+      advice: v.optional(v.string()), // Specific cost-cutting advice (English)
+    }),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.documentId, {
+      analysis: args.analysis,
+      status: "completed", // Update status to completed when saving
+    });
+  },
+});

@@ -1,0 +1,31 @@
+/* Glassmorphism & Color Variables */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --pantone-green-bg: #E8F5E9; /* Very light background */
+  --pantone-green-dark: #2E7D32; /* Dark green for text */
+  --pantone-green-accent: #66BB6A; /* For charts */
+}
+
+body {
+  background: linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%); /* Subtle gradient */
+  color: #37474f;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+

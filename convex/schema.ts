@@ -23,6 +23,15 @@ export default defineSchema({
       v.literal("completed"),    // Successfully analyzed
       v.literal("failed")        // Terminal error state
     ),
+    
+    // Analysis result storage (optional)
+    analysis: v.optional(v.object({
+      totalSpent: v.number(),
+      period: v.optional(v.string()),
+      transactions: v.array(v.any()), // Complex objects use v.any() or detailed definition
+      summary: v.optional(v.string()), // AI's sarcastic or encouraging comment (English)
+      advice: v.optional(v.string()), // Specific cost-cutting advice (English)
+    })),
   })
     .index("by_status", ["status"])
     .index("by_ownerId", ["ownerId"]),
