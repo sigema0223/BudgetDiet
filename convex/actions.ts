@@ -56,9 +56,7 @@ export const analyzeFinancialText = action({
 
       1. totalSpent: Total amount spent (number)
 
-      2. period: Statement period (e.g., "2025-12-11 ~ 2026-01-10")
-
-      3. transactions: List of transactions (array)
+      2. transactions: List of transactions (array)
 
          - date: Transaction date (YYYY-MM-DD)
 
@@ -66,11 +64,18 @@ export const analyzeFinancialText = action({
 
          - amount: Amount (Number)
 
-         - category: Category (Infer one: Food, Shopping, Transport, Utilities, Travel, Other)
+         - category: Category (Infer one from the list below):
+           * Food: Restaurants, cafes, grocery stores, food delivery, bars, pubs, clubs
+           * Shopping: Retail stores, online shopping, clothing, electronics
+           * Transport: Public transport, taxis, fuel, parking, car maintenance
+           * Utilities: Electricity, water, gas, internet, phone bills
+           * Travel: Hotels, flights, travel bookings, vacation expenses
+           * Transaction: Bank transfers, account transfers, direct debits, standing orders, wire transfers, remittances
+           * Other: Any transaction that doesn't fit the above categories
 
-      4. summary: A one-sentence sarcastic or encouraging comment on the user's spending habits (English).
+      3. summary: A one-sentence sarcastic or encouraging comment on the user's spending habits (English).
 
-      5. advice: Specific advice on where to cut costs based on the highest spending category (English).
+      4. advice: Specific advice on where to cut costs based on the highest spending category (English).
 
       [Constraints]
 
@@ -94,12 +99,46 @@ export const analyzeFinancialText = action({
       response_format: { type: "json_object" }, // Force JSON mode
     });
 
-    // 4. Get and return result
+    // 4. Get and parse result
     const result = completion.choices[0].message.content;
     console.log("🤖 Analysis complete! Result length:", result?.length);
 
     if (!result) throw new Error("GPT returned an empty response.");
 
-    return JSON.parse(result); // Convert string to actual JSON object
+    const data = JSON.parse(result);
+
+    // 5. Calculate period and averageDailySpent using TypeScript
+    let averageDailySpent = 0;
+    let period = "날짜 정보 없음";
+
+    if (data.transactions && data.transactions.length > 0) {
+      // 1. 날짜 정렬 (TypeScript가 타입을 알 수 있게 t: any 사용)
+      const dates = data.transactions
+        .map((t: any) => new Date(t.date).getTime())
+        .sort((a: number, b: number) => a - b);
+
+      const minDate = new Date(dates[0]);
+      const maxDate = new Date(dates[dates.length - 1]);
+
+      // 2. 기간 문자열 생성
+      period = `${minDate.toISOString().split('T')[0]} ~ ${maxDate.toISOString().split('T')[0]}`;
+
+      // 3. 날짜 차이 계산 (+1일 추가)
+      const diffTime = Math.abs(maxDate.getTime() - minDate.getTime());
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+      // 4. 평균 계산
+      if (diffDays > 0) {
+        averageDailySpent = Number((data.totalSpent / diffDays).toFixed(2));
+      }
+    }
+
+    const finalResult = {
+      ...data,
+      period,
+      averageDailySpent,
+    };
+
+    return finalResult;
   },
 });

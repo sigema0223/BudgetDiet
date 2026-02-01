@@ -100,6 +100,7 @@ export const saveAnalysisResult = mutation({
     analysis: v.object({
       totalSpent: v.number(),
       period: v.optional(v.string()),
+      averageDailySpent: v.optional(v.number()),
       transactions: v.array(v.any()),
       summary: v.optional(v.string()), // AI's sarcastic or encouraging comment (English)
       advice: v.optional(v.string()), // Specific cost-cutting advice (English)

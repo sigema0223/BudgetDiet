@@ -1,31 +1,477 @@
-/* Glassmorphism & Color Variables */
+/* Google Font: Frank Ruhl Libre */
+/* Imported in index.html */
 
+/* Pantone Mint Color Palette */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  --pantone-green-bg: #E8F5E9; /* Very light background */
-  --pantone-green-dark: #2E7D32; /* Dark green for text */
-  --pantone-green-accent: #66BB6A; /* For charts */
+  --mint-primary: #88d4ab;
+  --mint-light: #a7f3d0;
+  --mint-dark: #5cb88f;
+  --mint-glass: rgba(136, 212, 171, 0.15);
+  --mint-accent-1: #6ee7b7;
+  --mint-accent-2: #34d399;
+
+  /* Typography Scale */
+  --text-hero: 5rem;      /* Logo initial (reduced from 6rem) */
+  --text-2xl: 2rem;       /* Section headers */
+  --text-xl: 1.5rem;      /* Card titles */
+  --text-base: 1rem;      /* Body text */
+  --text-sm: 0.875rem;    /* Secondary text */
+
+  /* Spacing System */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;       /* Current default */
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%); /* Subtle gradient */
-  color: #37474f;
-  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  font-family: "Frank Ruhl Libre", serif;
+  color: #1f2937;
+  background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #fdf4ff 100%);
+  overflow-x: hidden;
+  position: relative;
 }
 
+/* Floating Animated Orbs */
+.orb-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--mint-light) 0%, var(--mint-primary) 100%);
+  top: 10%;
+  left: 10%;
+}
+
+.orb-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, var(--mint-light) 0%, var(--mint-primary) 100%);
+  bottom: 15%;
+  right: 15%;
+}
+
+/* Glassmorphism Card Styles */
 .glass-card {
-  background: var(--glass-bg);
-  box-shadow: var(--glass-shadow);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.glass-card-mint {
+  background: linear-gradient(
+    135deg,
+    rgba(136, 212, 171, 0.15) 0%,
+    rgba(167, 243, 208, 0.05) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+/* Spacing Utility Classes */
+.section-gap {
+  margin-bottom: var(--space-2xl); /* 48px → 64px */
+}
+
+.card-padding {
+  padding: var(--space-lg); /* More spacious */
+}
+
+/* Button Styles */
+.btn-mint {
+  background: linear-gradient(
+    135deg,
+    var(--mint-primary) 0%,
+    var(--mint-light) 100%
+  );
+  border: none;
+  border-radius: 24px;
+  padding: 12px 32px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Frank Ruhl Libre", serif;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-mint:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-mint:active {
+  transform: scale(0.98);
+}
+
+.btn-mint:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Input Styles */
+.input-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-family: "Frank Ruhl Libre", serif;
+  color: #1f2937;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.input-glass:focus {
+  outline: none;
+  border-color: var(--mint-primary);
+  box-shadow: 0 0 0 3px rgba(136, 212, 171, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.input-glass::placeholder {
+  color: #9ca3af;
+}
+
+/* Text Styles */
+.text-mint-dark {
+  color: var(--mint-dark);
+  font-weight: 700;
+}
+
+.text-mint-primary {
+  color: var(--mint-primary);
+}
+
+/* Body Text - Sans-serif for better readability */
+.body-text {
+  font-family: "Inter", sans-serif;
+  line-height: 1.7; /* Improved readability */
+  font-size: var(--text-base);
+}
+
+/* Utility Classes */
+.rounded-3xl {
+  border-radius: 24px;
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mint-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mint-dark);
+}
+
+/* Custom File Upload Button */
+.hidden-input {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  border: 2px solid rgba(136, 212, 171, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--mint-dark);
+  font-weight: 600;
+  font-size: var(--text-base);
+  font-family: "Frank Ruhl Libre", serif;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  padding: 24px;
-  margin-bottom: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(136, 212, 171, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  min-height: 56px;
+  position: relative;
+  overflow: hidden;
 }
 
+.custom-file-upload::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(136, 212, 171, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.custom-file-upload:hover::before {
+  left: 100%;
+}
+
+.custom-file-upload:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(167, 243, 208, 0.2) 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(92, 184, 143, 0.2),
+    0 4px 12px rgba(136, 212, 171, 0.15);
+  border-color: var(--mint-primary);
+}
+
+.custom-file-upload.active {
+  background: linear-gradient(
+    135deg,
+    rgba(136, 212, 171, 0.15) 0%,
+    rgba(167, 243, 208, 0.1) 100%
+  );
+  border-color: var(--mint-primary);
+  color: var(--mint-dark);
+}
+
+.custom-file-upload:active {
+  transform: translateY(0);
+}
+
+.custom-file-upload span {
+  font-size: 1.3rem;
+  display: inline-block;
+}
+
+/* Digit Indicator Styles - Minimal Dots */
+.digit-indicator {
+  display: flex;
+  gap: var(--space-xs);
+  justify-content: center;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.digit-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d1d5db; /* Gray when empty */
+  transition: all 0.3s ease;
+}
+
+.digit-dot.filled {
+  background: var(--mint-primary); /* Green when filled */
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 2px 8px rgba(136, 212, 171, 0.4);
+}
+
+/* Mobile Optimization */
+/* Logo Gradient Text - Pantone Mint Green */
+.logo-text {
+  background: linear-gradient(180deg, #5CB88F 0%, #88D4AB 50%, #A7F3D0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 768px) {
+  /* Logo size adjustment */
+  .logo-text {
+    font-size: 3.5rem !important; /* Reduced from 5rem */
+  }
+
+  .logo-container {
+    padding-top: 30vh !important; /* Reduced from 40vh */
+  }
+
+  /* Card padding reduction */
+  .glass-card,
+  .glass-card-mint {
+    padding: var(--space-sm); /* 16px instead of 24px */
+    border-radius: 20px;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Orb size reduction */
+  .orb-1,
+  .orb-2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* 2-column grid → 1-column */
+  .grid-2-col {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-sm) !important;
+  }
+
+  /* Pie chart height adjustment */
+  .pie-chart-container {
+    min-height: 250px !important;
+  }
+
+  .pie-chart-container .recharts-wrapper {
+    height: 250px !important;
+  }
+
+  /* Section spacing reduction */
+  .section-gap {
+    margin-bottom: var(--space-md) !important; /* 48px → 24px on mobile */
+  }
+
+  /* Input and button adjustments */
+  .input-glass {
+    padding: 12px 16px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  .btn-mint {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+
+  /* Digit indicator adjustments */
+  .digit-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .digit-dot.filled {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Document header adjustments */
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Total spent font size */
+  .total-spent {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  :root {
+    --text-hero-mobile: 2.5rem;
+  }
+
+  .glass-card,
+  .glass-card-mint {
+    padding: var(--space-xs);
+    border-radius: 16px;
+  }
+
+  .orb-1,
+  .orb-2 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .digit-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .digit-dot.filled {
+    width: 8px;
+    height: 8px;
+  }
+
+  .btn-mint {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+
+  .custom-file-upload {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+    min-height: 48px;
+  }
+
+  .custom-file-upload span {
+    font-size: 1.1rem;
+  }
+}

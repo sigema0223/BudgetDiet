@@ -4,10 +4,11 @@ import { v } from "convex/values";
 export default defineSchema({
   // 0. Users Table: User accounts
   users: defineTable({
+    code: v.string(),       // 6-digit code
+    password: v.string(),   // 2-digit password (stored as string)
     name: v.optional(v.string()),
     email: v.optional(v.string()),
-    tokenIdentifier: v.string(), // Format: "code:123456"
-  }).index("by_token", ["tokenIdentifier"]),
+  }).index("by_code", ["code"]),
 
   // 1. Documents Table: Stores the source of truth for every upload.
   documents: defineTable({
@@ -28,6 +29,7 @@ export default defineSchema({
     analysis: v.optional(v.object({
       totalSpent: v.number(),
       period: v.optional(v.string()),
+      averageDailySpent: v.optional(v.number()),
       transactions: v.array(v.any()), // Complex objects use v.any() or detailed definition
       summary: v.optional(v.string()), // AI's sarcastic or encouraging comment (English)
       advice: v.optional(v.string()), // Specific cost-cutting advice (English)
