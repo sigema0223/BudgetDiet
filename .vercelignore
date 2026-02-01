@@ -1,4 +1,18 @@
-convex/
+# Exclude convex source files, but keep _generated folder for build
+convex/actions.ts
+convex/documents.ts
+convex/users.ts
+convex/schema.ts
+convex/application/
+convex/domain/
+convex/infrastructure/
+convex/pdf-parse.d.ts
+convex/README.md
+convex/tsconfig.json
+
+# Keep convex/_generated for build (needed by src files)
+!convex/_generated/
+
 *.log
 .DS_Store
 
