@@ -32,7 +32,8 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true
   },
-  "include": ["src", "convex"],
+  "include": ["src"],
+  "exclude": ["convex", "node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
 
